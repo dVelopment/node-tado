@@ -6,7 +6,7 @@ var BASE_URL = 'https://my.tado.com';
 
 describe('client', function () {
 
-    descibe('login', function () {
+    describe('login', function () {
 
         function fakeLogin(successful) {
             return spyOn(request, 'post').and.callFake(function (options, cb) {
