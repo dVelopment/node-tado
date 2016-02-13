@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dVelopment/node-tado.svg?branch=master)](https://travis-ci.org/dVelopment/node-tado)
+
 # node-tado
 
 This is a Node.js client for the [Tado](https://www.tado.com) smart thermostat web API. It offers a promise-based API.
