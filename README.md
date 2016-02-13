@@ -5,7 +5,7 @@ This is a Node.js client for the [Tado](https://www.tado.com) smart thermostat w
 **Please be aware that this client simply mocks the behaviour of the [Tado Web-App](https://my.tado.com).**
 This means that it could stop working due to implemented restrictions by Tado at any time.
 
- ## Usage
+## Usage
 
 Before you can access any API methods, you must perform a login, using your Tado username and password:
 
