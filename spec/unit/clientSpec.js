@@ -60,7 +60,8 @@ describe('client', () => {
                 let options = args[0];
                 expect(options.qs).not.toBe(undefined);
                 expect(options.qs).toEqual({
-                    client_id: 'tado-webapp',
+                    client_id: 'tado-web-app',
+                    client_secret: 'wZaRN7rpjn3FoNyF5IFuxg9uMzYJcvOoQ8QWiIqS3hfk6gLhVlG57j5YNoZL2Rtc',
                     grant_type: 'password',
                     password: 'password',
                     username: 'user',
@@ -120,7 +121,7 @@ describe('client', () => {
                 let [options] = spy.calls.argsFor(0);
                 expect(options.qs).not.toBe(undefined);
                 expect(options.qs).toEqual({
-                    client_id: 'tado-webapp',
+                    client_id: 'tado-web-app',
                     grant_type: 'refresh_token',
                     refresh_token: 'asdf'
                 });
