@@ -4,7 +4,8 @@ import request from 'request';
 import moment from 'moment';
 
 const BASE_URL = 'https://my.tado.com';
-const CLIENT_ID = 'tado-webapp';
+const CLIENT_ID = 'tado-web-app';
+const CLIENT_SECRET = 'wZaRN7rpjn3FoNyF5IFuxg9uMzYJcvOoQ8QWiIqS3hfk6gLhVlG57j5YNoZL2Rtc';
 const REFERER = 'https://my.tado.com/';
 
 export default class Client {
@@ -14,6 +15,7 @@ export default class Client {
                 url: BASE_URL + '/oauth/token',
                 qs: {
                     client_id: CLIENT_ID,
+                    client_secret: CLIENT_SECRET,
                     grant_type: 'password',
                     password: password,
                     username: username,
