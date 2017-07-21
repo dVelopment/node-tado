@@ -4,6 +4,7 @@ import request from 'request';
 import moment from 'moment';
 
 const BASE_URL = 'https://my.tado.com';
+const AUTH_URL = 'https://auth.tado.com';
 const CLIENT_ID = 'tado-web-app';
 const CLIENT_SECRET = 'wZaRN7rpjn3FoNyF5IFuxg9uMzYJcvOoQ8QWiIqS3hfk6gLhVlG57j5YNoZL2Rtc';
 const REFERER = 'https://my.tado.com/';
@@ -12,7 +13,7 @@ export default class Client {
     login(username, password) {
         return new Promise((resolve, reject) => {
             request.post({
-                url: BASE_URL + '/oauth/token',
+                url: AUTH_URL + '/oauth/token',
                 qs: {
                     client_id: CLIENT_ID,
                     client_secret: CLIENT_SECRET,
@@ -49,7 +50,7 @@ export default class Client {
             }
 
             request.get({
-                url: BASE_URL + '/oauth/token',
+                url: AUTH_URL + '/oauth/token',
                 qs: {
                     client_id: CLIENT_ID,
                     grant_type: 'refresh_token',
