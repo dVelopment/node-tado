@@ -6,6 +6,7 @@ import moment from 'moment';
 import _ from 'lodash';
 
 const BASE_URL = 'https://my.tado.com';
+const AUTH_URL = 'https://auth.tado.com';
 
 describe('client', () => {
     const TOKEN = {
@@ -67,7 +68,7 @@ describe('client', () => {
                     username: 'user',
                     scope: 'home.user'
                 });
-                expect(options.url).toEqual(BASE_URL + '/oauth/token');
+                expect(options.url).toEqual(AUTH_URL + '/oauth/token');
 
                 done();
             }, () => fail('there shouldn\'t have been an error'));
@@ -125,7 +126,7 @@ describe('client', () => {
                     grant_type: 'refresh_token',
                     refresh_token: 'asdf'
                 });
-                expect(options.url).toEqual(BASE_URL + '/oauth/token');
+                expect(options.url).toEqual(AUTH_URL + '/oauth/token');
 
                 [options] = spy.calls.argsFor(1);
                 expect(options.url).toEqual(BASE_URL + '/api/v2/me');
