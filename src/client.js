@@ -36,7 +36,7 @@ export default class Client {
 
     saveToken(token) {
         this.token = token;
-        this.token.expires_in = moment().add(token.expires_in, 'seconds').toDate();
+        this.token.expires_in = moment().add(token.expires_in / 2, 'seconds').toDate();
     }
 
     refreshToken() {

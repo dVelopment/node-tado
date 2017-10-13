@@ -88,7 +88,7 @@ describe('client', () => {
                 expect(token.refresh_token).toEqual(TOKEN.refresh_token);
                 expect(token.scope).toEqual(TOKEN.scope);
                 expect(moment().add(600, 'seconds').isAfter(token.expires_in)).toBe(true);
-                expect(moment().add(550, 'seconds').isAfter(token.expires_in)).toBe(false);
+                expect(moment().add(290, 'seconds').isAfter(token.expires_in)).toBe(false);
 
                 done();
             }, () => fail('there shouldn\'t have been an error'));
@@ -114,7 +114,7 @@ describe('client', () => {
                 access_token: 'asdf',
                 token_type: 'bearer',
                 refresh_token: 'asdf',
-                expires_in: moment().subtract(5, 'seconds').toDate(),
+                expires_in: moment().subtract(60, 'seconds').toDate(),
                 scope: 'home.user'
             };
 
