@@ -107,7 +107,8 @@ describe('client', () => {
         });
 
         it('should refresh a token', (done) => {
-            let spy = mockRequest(TOKEN);
+            let spyPost = mockRequest(TOKEN, 'post');
+            let spyGet = mockRequest(TOKEN, 'get');
             let client = new Client();
             client.token = {
                 access_token: 'asdf',
@@ -118,17 +119,20 @@ describe('client', () => {
             };
 
             client.me().then(() => {
-                expect(spy.calls.count()).toEqual(2);
-                let [options] = spy.calls.argsFor(0);
+                expect(spyPost.calls.count()).toEqual(1);
+                expect(spyGet.calls.count()).toEqual(1);
+                let [options] = spyPost.calls.argsFor(0);
                 expect(options.qs).not.toBe(undefined);
                 expect(options.qs).toEqual({
                     client_id: 'tado-web-app',
+                    client_secret: 'wZaRN7rpjn3FoNyF5IFuxg9uMzYJcvOoQ8QWiIqS3hfk6gLhVlG57j5YNoZL2Rtc',
                     grant_type: 'refresh_token',
-                    refresh_token: 'asdf'
+                    refresh_token: 'asdf',
+                    scope: 'home.user'
                 });
                 expect(options.url).toEqual(AUTH_URL + '/oauth/token');
 
-                [options] = spy.calls.argsFor(1);
+                [options] = spyGet.calls.argsFor(0);
                 expect(options.url).toEqual(BASE_URL + '/api/v2/me');
 
                 done();

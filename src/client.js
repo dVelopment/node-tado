@@ -49,12 +49,14 @@ export default class Client {
                 return resolve();
             }
 
-            request.get({
+            request.post({
                 url: AUTH_URL + '/oauth/token',
                 qs: {
                     client_id: CLIENT_ID,
+                    client_secret: CLIENT_SECRET,
                     grant_type: 'refresh_token',
-                    refresh_token: this.token.refresh_token
+                    refresh_token: this.token.refresh_token,
+                    scope: 'home.user'
                 },
                 json: true
             }, (err, response, result) => {
