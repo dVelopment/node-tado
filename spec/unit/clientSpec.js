@@ -88,7 +88,7 @@ describe('client', () => {
                 expect(token.refresh_token).toEqual(TOKEN.refresh_token);
                 expect(token.scope).toEqual(TOKEN.scope);
                 expect(moment().add(600, 'seconds').isAfter(token.expires_in)).toBe(true);
-                expect(moment().add(550, 'seconds').isAfter(token.expires_in)).toBe(false);
+                expect(moment().add(290, 'seconds').isAfter(token.expires_in)).toBe(false);
 
                 done();
             }, () => fail('there shouldn\'t have been an error'));
@@ -107,28 +107,32 @@ describe('client', () => {
         });
 
         it('should refresh a token', (done) => {
-            let spy = mockRequest(TOKEN);
+            let spyPost = mockRequest(TOKEN, 'post');
+            let spyGet = mockRequest(TOKEN, 'get');
             let client = new Client();
             client.token = {
                 access_token: 'asdf',
                 token_type: 'bearer',
                 refresh_token: 'asdf',
-                expires_in: moment().subtract(5, 'seconds').toDate(),
+                expires_in: moment().subtract(60, 'seconds').toDate(),
                 scope: 'home.user'
             };
 
             client.me().then(() => {
-                expect(spy.calls.count()).toEqual(2);
-                let [options] = spy.calls.argsFor(0);
+                expect(spyPost.calls.count()).toEqual(1);
+                expect(spyGet.calls.count()).toEqual(1);
+                let [options] = spyPost.calls.argsFor(0);
                 expect(options.qs).not.toBe(undefined);
                 expect(options.qs).toEqual({
                     client_id: 'tado-web-app',
+                    client_secret: 'wZaRN7rpjn3FoNyF5IFuxg9uMzYJcvOoQ8QWiIqS3hfk6gLhVlG57j5YNoZL2Rtc',
                     grant_type: 'refresh_token',
-                    refresh_token: 'asdf'
+                    refresh_token: 'asdf',
+                    scope: 'home.user'
                 });
                 expect(options.url).toEqual(AUTH_URL + '/oauth/token');
 
-                [options] = spy.calls.argsFor(1);
+                [options] = spyGet.calls.argsFor(0);
                 expect(options.url).toEqual(BASE_URL + '/api/v2/me');
 
                 done();
